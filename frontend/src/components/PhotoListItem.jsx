@@ -1,19 +1,29 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
+import FavIcon from "./FavIcon";
+import PhotoFavButton from "./PhotoFavButton";
+
+
 
 
 
 const PhotoListItem = (props) => {
-  const {location, 
-    imageSource,username,profile} = {...props};
+  const {location, urls, user} = {...props};
+
+
   return (
-    <section className="photo-list__item">
-      <img src={imageSource} alt="photo" className="photo-list__image"/>
+    <section>
+      <div>
+      <PhotoFavButton />
+      </div>
+        <img src={urls.regular} alt="photo" className="photo-list__image"/>
+        
       <div className="photo-list__user-details">
-        <img src={profile} alt="profile photo" className="photo-list__user-profile"/>
+        <img src={user.profile} alt="profile photo" className="photo-list__user-profile"/>
         <div className="photo-list__user-info">
-          <p>{username}</p>
+          <p>{user.username}</p>
           <p className="photo-list__user-location">{location.city}, {location.country}</p>
         </div>
       </div>
