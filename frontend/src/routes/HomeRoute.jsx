@@ -1,20 +1,55 @@
-import React from 'react';
+import {React, useState} from 'react';
 
 import '../styles/HomeRoute.scss';
 import TopNavigationBar from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
+import FavBadge from 'components/FavBadge';
 
 
 const HomeRoute = (props) => {
   const {photos, topics} = props;
+  const [favoritedPhotos, setFavouritedPhotos] = useState([]);
+  const [showFav, setShowFav] = useState(false);
+  
+  /**
+   * 
+   * @param {*} photoId 
+   * If the photoId exists in the favorite photos, we remove it
+   * If it doesn't exist, we filter the photo out,
+   * Add it in favoritedPhtos 
+   */
+  const toggleFavorite = (photoId) => {
+    console.log(favoritedPhotos)
+    const checkFav = favoritedPhotos.filter((el) => el.id === photoId);
+    if (checkFav.length > 0) {
+      const filtered = favoritedPhotos.filter(el => el.id !==photoId);
+      setFavouritedPhotos(filtered);
+    } else {
+      const favoritePhoto = photos.filter((el) => el.id === photoId)
+      console.log(favoritePhoto);
+      setFavouritedPhotos((prev) => ([...prev, ...favoritePhoto]));
+    }
+  };
+
+  const toggleShowFav =() => {
+    setShowFav((prev) => !prev);
+  }
   return (
     <div className="home-route">
       {/* Insert React */}
-      <TopNavigationBar topics={topics}/>
-      <PhotoList photos={photos}/>
+      <TopNavigationBar topics={topics} favoritedPhotos={favoritedPhotos} toggleShowFav={toggleShowFav} showFav={showFav}/>
+      <PhotoList photos={showFav ? favoritedPhotos : photos} onToggleFavorite={toggleFavorite} favoritedPhotos={favoritedPhotos}/>
     
     </div>
   );
 };
 
 export default HomeRoute;
+
+// HomeRoute
+//   TopNavigationBar
+//     TopicList
+//     FavBadge
+//   PhotosList
+
+

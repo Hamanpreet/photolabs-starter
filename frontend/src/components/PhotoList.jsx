@@ -5,16 +5,15 @@ import photos from "mocks/photos";
 
 
 const PhotoList = (props) => {
-  const {photos} = props;
+  const {photos, onToggleFavorite, favoritedPhotos} = props;
 
   return (
     <ul className="photo-list">
-      {photos.map((el) =>{
-        return <PhotoListItem {...el } key={el.id}/>;
+      {photos.map((photo) =>{
+        return <PhotoListItem photo={photo} key={photo.id}  onToggleFavorite={onToggleFavorite}
+        isFavorited={favoritedPhotos.includes(photo.id)}
+          />;
       })}
-      {/* <PhotoListItem {...sampleDataForPhotoListItem}/>
-      <PhotoListItem {...sampleDataForPhotoListItem}/>
-      <PhotoListItem {...sampleDataForPhotoListItem}/> */}
     </ul>
   );
 };

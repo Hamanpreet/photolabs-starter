@@ -10,21 +10,20 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
-  const {location, urls, user} = {...props};
-
+  const {photo, isFavorited, onToggleFavorite } = props;
 
   return (
     <section>
       <div>
-      <PhotoFavButton />
+      <PhotoFavButton isFavorited={isFavorited} onToggleFavorite={() => onToggleFavorite(photo.id)}/>
       </div>
-        <img src={urls.regular} alt="photo" className="photo-list__image"/>
+        <img src={photo.urls.regular} alt="photo" className="photo-list__image"/>
         
       <div className="photo-list__user-details">
-        <img src={user.profile} alt="profile photo" className="photo-list__user-profile"/>
+        <img src={photo.user.profile} alt="profile photo" className="photo-list__user-profile"/>
         <div className="photo-list__user-info">
-          <p>{user.username}</p>
-          <p className="photo-list__user-location">{location.city}, {location.country}</p>
+          <p>{photo.user.username}</p>
+          <p className="photo-list__user-location">{photo.location.city}, {photo.location.country}</p>
         </div>
       </div>
     </section>
