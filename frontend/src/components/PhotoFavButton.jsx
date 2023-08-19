@@ -19,6 +19,3 @@ function PhotoFavButton() {
 
 export default PhotoFavButton;
 
-// PhotoFavButton wraps FavIcon
-// I have put event handler on FavIcon
-// Where is it supposed to be?

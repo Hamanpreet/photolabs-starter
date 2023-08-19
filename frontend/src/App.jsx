@@ -1,9 +1,9 @@
 import React from 'react';
-
-import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
 import './styles/PhotoList.scss'
-import PhotoList from 'components/PhotoList';
+import photos from '../src/mocks/photos';
+import topics from '../src/mocks/topics';
+import HomeRoute from 'routes/HomeRoute';
 
 
 
@@ -11,8 +11,7 @@ import PhotoList from 'components/PhotoList';
 const App = () => {
   return (
     <div className="App">
-      <PhotoList />
-      
+       <HomeRoute photos={photos} topics={topics}/>
     </div>
   );
 };
