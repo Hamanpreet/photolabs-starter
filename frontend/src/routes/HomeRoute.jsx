@@ -7,7 +7,7 @@ import FavBadge from 'components/FavBadge';
 
 
 const HomeRoute = (props) => {
-  const {photos, topics, setModalVisible} = props;
+  const {photos, topics, setModalVisible, setSelectedPhoto} = props;
   const [favoritedPhotos, setFavouritedPhotos] = useState([]);
   const [showFav, setShowFav] = useState(false);
   
@@ -38,7 +38,8 @@ const HomeRoute = (props) => {
       <PhotoList photos={showFav ? favoritedPhotos : photos} 
       onToggleFavorite={toggleFavorite} 
       favoritedPhotos={favoritedPhotos}
-      setModalVisible={setModalVisible}/>
+      setModalVisible={setModalVisible}
+      setSelectedPhoto={setSelectedPhoto}/>
     
     </div>
   );

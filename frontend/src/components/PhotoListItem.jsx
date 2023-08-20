@@ -7,9 +7,14 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
-  const {photo, isFavorited, onToggleFavorite, setModalVisible } = props;
+  const {photo, isFavorited, onToggleFavorite, setModalVisible, setSelectedPhoto } = props;
   const handleModal = () => {
-    setModalVisible(prev => !prev);
+    setModalVisible(true);
+    const selectedPhotoData = {
+      regularImageUrl: photo.urls.regular,
+      similarPhotos: photo.similar_photos,
+    };
+    setSelectedPhoto(selectedPhotoData);
   };
 
   return (
@@ -17,7 +22,8 @@ const PhotoListItem = (props) => {
       <div>
       <PhotoFavButton isFavorited={isFavorited} onToggleFavorite={() => onToggleFavorite(photo.id)}/>
       </div>
-        <img src={photo.urls.regular} alt="photo" className="photo-list__image" onClick={handleModal}/>
+        <img src={photo.urls.regular} alt="photo" className="photo-list__image" 
+        onClick={handleModal}/>
         
       <div className="photo-list__user-details">
         <img src={photo.user.profile} alt="profile photo" className="photo-list__user-profile"/>

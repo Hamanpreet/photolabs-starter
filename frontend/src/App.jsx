@@ -12,10 +12,13 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 const App = () => {
   //keep passing setModalVisible till photoListItem and toggle there
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState({});
   return (
     <div className="App">
-       <HomeRoute photos={photos} topics={topics} setModalVisible={setModalVisible}/>
-       {modalVisible && <PhotoDetailsModal setModalVisible={setModalVisible}/>}
+       <HomeRoute photos={photos} topics={topics} setModalVisible={setModalVisible}
+        setSelectedPhoto={setSelectedPhoto}/>
+       {modalVisible && <PhotoDetailsModal setModalVisible={setModalVisible} 
+       photos={photos} selectedPhoto={selectedPhoto}/>}
     </div>
   );
 };
