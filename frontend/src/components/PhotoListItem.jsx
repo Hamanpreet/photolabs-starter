@@ -1,23 +1,23 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
-import FavIcon from "./FavIcon";
+import { unstable_renderSubtreeIntoContainer } from "react-dom"
 import PhotoFavButton from "./PhotoFavButton";
 
 
 
-
-
 const PhotoListItem = (props) => {
-  const {photo, isFavorited, onToggleFavorite } = props;
+  const {photo, isFavorited, onToggleFavorite, setModalVisible } = props;
+  const handleModal = () => {
+    setModalVisible(prev => !prev);
+  };
 
   return (
     <section>
       <div>
       <PhotoFavButton isFavorited={isFavorited} onToggleFavorite={() => onToggleFavorite(photo.id)}/>
       </div>
-        <img src={photo.urls.regular} alt="photo" className="photo-list__image"/>
+        <img src={photo.urls.regular} alt="photo" className="photo-list__image" onClick={handleModal}/>
         
       <div className="photo-list__user-details">
         <img src={photo.user.profile} alt="profile photo" className="photo-list__user-profile"/>

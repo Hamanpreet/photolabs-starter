@@ -7,7 +7,7 @@ import FavBadge from 'components/FavBadge';
 
 
 const HomeRoute = (props) => {
-  const {photos, topics} = props;
+  const {photos, topics, setModalVisible} = props;
   const [favoritedPhotos, setFavouritedPhotos] = useState([]);
   const [showFav, setShowFav] = useState(false);
   
@@ -19,14 +19,12 @@ const HomeRoute = (props) => {
    * Add it in favoritedPhtos 
    */
   const toggleFavorite = (photoId) => {
-    console.log(favoritedPhotos)
     const checkFav = favoritedPhotos.filter((el) => el.id === photoId);
     if (checkFav.length > 0) {
       const filtered = favoritedPhotos.filter(el => el.id !==photoId);
       setFavouritedPhotos(filtered);
     } else {
       const favoritePhoto = photos.filter((el) => el.id === photoId)
-      console.log(favoritePhoto);
       setFavouritedPhotos((prev) => ([...prev, ...favoritePhoto]));
     }
   };
@@ -36,9 +34,11 @@ const HomeRoute = (props) => {
   }
   return (
     <div className="home-route">
-      {/* Insert React */}
       <TopNavigationBar topics={topics} favoritedPhotos={favoritedPhotos} toggleShowFav={toggleShowFav} showFav={showFav}/>
-      <PhotoList photos={showFav ? favoritedPhotos : photos} onToggleFavorite={toggleFavorite} favoritedPhotos={favoritedPhotos}/>
+      <PhotoList photos={showFav ? favoritedPhotos : photos} 
+      onToggleFavorite={toggleFavorite} 
+      favoritedPhotos={favoritedPhotos}
+      setModalVisible={setModalVisible}/>
     
     </div>
   );
