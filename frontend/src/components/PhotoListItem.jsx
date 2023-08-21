@@ -12,7 +12,8 @@ const PhotoListItem = (props) => {
     setModalVisible(true);
     const selectedPhotoData = {
       regularImageUrl: photo.urls.regular,
-      similarPhotos: photo.similar_photos,
+      similarPhotos: photo.similar_photos
+
     };
     setSelectedPhoto(selectedPhotoData);
   };
