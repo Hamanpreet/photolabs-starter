@@ -1,44 +1,69 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+import photos from '../mocks/photos';
+
+export const ACTIONS = {
+  TOGGLE_FAV: 'TOGGLE_FAV',
+  SET_MODAL_VISIBLE: 'SET_MODAL_VISIBLE',
+  SELECT_PHOTO: 'SELECT_PHOTO',
+  TOGGLE_SHOW_FAV: 'TOGGLE_SHOW_FAV',
+}
+
+export function reducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.TOGGLE_FAV:
+      const checkFav = state.favoritedPhotos.filter((el) => el.id === action.value);
+      if (checkFav.length > 0) {
+        const filtered = state.favoritedPhotos.filter(el => el.id !== action.value);
+        console.log("filtered", filtered);
+        return { ...state, favoritedPhotos: filtered };
+      } else {
+        const favoritedPhotos = state.photos.filter((el) => el.id === action.value);
+        console.log("favphots",favoritedPhotos);
+        return { ...state, favoritedPhotos };
+      }
+    case ACTIONS.TOGGLE_SHOW_FAV:
+      return { ...state, showFav: !state.showFav };
+    case ACTIONS.SET_MODAL_VISIBLE:
+      return { ...state, modalVisible: !state.modalVisible };
+    case ACTIONS.SELECT_PHOTO:
+      return { ...state, selectedPhoto: action.value };
+
+    default:
+      throw new Error(
+        `Tried to reduce with unsupported action type: ${action.type}`
+      );
+  }
+}
 
 
 export function useApplicationData() {
-  const [state, setState] = useState({
+  const initialState = {
     modalVisible: false,
     selectedPhoto: null,
     favoritedPhotos: [],
     showFav: false,
-  });
-
-  const setModalVisible = (modalVisible) => {
-    setState((prevState) => ({ ...prevState, modalVisible }));
+    photos,
   };
 
-  const setSelectedPhoto = (selectedPhoto) => {
-    setState((prevState) => ({ ...prevState, selectedPhoto }));
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleFavorite = (photoId) => {
-    setState((prevState) => {
-      const { favoritedPhotos } = prevState;
-      const isPhotoFavorited = favoritedPhotos.some((photo) => photo.id === photoId);
+    dispatch({ type: ACTIONS.TOGGLE_FAV, value: photoId });
+  }
 
-      if (isPhotoFavorited) {
-        const updatedFavoritedPhotos = favoritedPhotos.filter((photo) => photo.id !== photoId);
-        return { ...prevState, favoritedPhotos: updatedFavoritedPhotos };
-      } else {
-        const favoritePhoto = state.photos.find((photo) => photo.id === photoId); // Corrected line
-        const updatedFavoritedPhotos = [...favoritedPhotos, favoritePhoto];
-        return { ...prevState, favoritedPhotos: updatedFavoritedPhotos };
-      }
-    });
-  };
+  const toggleShowFav = (x) => {
+    dispatch({ type: ACTIONS.TOGGLE_SHOW_FAV, value: x});
+  }
 
-  const toggleShowFav = () => {
-    setState((prevState) => ({ ...prevState, showFav: !prevState.showFav }));
-  };
+  const setModalVisible = (x) => {
+    console.log("should be visible", state.modalVisible);
+    dispatch({ type: ACTIONS.SET_MODAL_VISIBLE, value: x})
+  }
 
-  // Destructure showFav from state
-  
+  const setSelectedPhoto = (data) => {
+    dispatch({ type: ACTIONS.SELECT_PHOTO, value: data });
+  }
+
 
   return {
     state,
