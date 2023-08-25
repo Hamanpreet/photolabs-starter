@@ -15,6 +15,8 @@ const HomeRoute = (props) => {
     favoritedPhotos,
     toggleFavorite,
     toggleShowFav,
+    setTopicData,
+    topicData,
   } = props;
 
   return (
@@ -24,6 +26,8 @@ const HomeRoute = (props) => {
         favoritedPhotos={favoritedPhotos}
         toggleShowFav={toggleShowFav}
         showFav={showFav}
+        setTopicData = {setTopicData}
+        topicData = {topicData}
       />
       <PhotoList
         photos={showFav ? favoritedPhotos : photos}
@@ -31,6 +35,7 @@ const HomeRoute = (props) => {
         favoritedPhotos={favoritedPhotos}
         setModalVisible={setModalVisible}
         setSelectedPhoto={setSelectedPhoto}
+        topicData = {topicData}
       />
     </div>
   );

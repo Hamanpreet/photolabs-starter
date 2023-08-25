@@ -15,9 +15,10 @@ export function Application(props) {
     setSelectedPhoto,
     toggleFavorite,
     toggleShowFav,
+    setTopicData,
   } = useApplicationData();
 
-  const { modalVisible, selectedPhoto, favoritedPhotos, showFav } = state;
+  const { modalVisible, selectedPhoto, favoritedPhotos, showFav, topicData } = state;
 
   return (
     <div className="App">
@@ -30,6 +31,8 @@ export function Application(props) {
         toggleFavorite={toggleFavorite}
         toggleShowFav={toggleShowFav}
         showFav={showFav}
+        setTopicData = {setTopicData}
+        topicData = {topicData}
       />
 
       {modalVisible && (

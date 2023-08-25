@@ -9,9 +9,10 @@ const PhotoList = (props) => {
     favoritedPhotos,
     setModalVisible,
     setSelectedPhoto,
+    topicData,
+    setTopicData,
   } = props;
-
-  console.log("here", photos, favoritedPhotos)
+ 
   return (
     <ul className="photo-list">
       {photos.map((photo) => {

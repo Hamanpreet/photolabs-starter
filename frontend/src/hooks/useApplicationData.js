@@ -6,6 +6,7 @@ export const ACTIONS = {
   SET_MODAL_VISIBLE: 'SET_MODAL_VISIBLE',
   SELECT_PHOTO: 'SELECT_PHOTO',
   TOGGLE_SHOW_FAV: 'TOGGLE_SHOW_FAV',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
 }
 
 export function reducer(state, action) {
@@ -14,11 +15,11 @@ export function reducer(state, action) {
       const checkFav = state.favoritedPhotos.filter((el) => el.id === action.value);
       if (checkFav.length > 0) {
         const filtered = state.favoritedPhotos.filter(el => el.id !== action.value);
-        console.log("filtered", filtered);
+       
         return { ...state, favoritedPhotos: filtered };
       } else {
         const favoritedPhotos = state.photos.filter((el) => el.id === action.value);
-        console.log("favphots",favoritedPhotos);
+        
         return { ...state, favoritedPhotos };
       }
     case ACTIONS.TOGGLE_SHOW_FAV:
@@ -27,7 +28,8 @@ export function reducer(state, action) {
       return { ...state, modalVisible: !state.modalVisible };
     case ACTIONS.SELECT_PHOTO:
       return { ...state, selectedPhoto: action.value };
-
+    case ACTIONS.SET_TOPIC_DATA:
+      return { ...state, topicData: action.value };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -42,6 +44,7 @@ export function useApplicationData() {
     selectedPhoto: null,
     favoritedPhotos: [],
     showFav: false,
+    topicData:null,
     photos,
   };
 
@@ -64,6 +67,10 @@ export function useApplicationData() {
     dispatch({ type: ACTIONS.SELECT_PHOTO, value: data });
   }
 
+  const setTopicData = (data) => {
+    dispatch({ type: ACTIONS.SET_TOPIC_DATA, value: data });
+  }
+
 
   return {
     state,
@@ -71,6 +78,7 @@ export function useApplicationData() {
     setSelectedPhoto,
     toggleFavorite,
     toggleShowFav,
+    setTopicData,
   };
 }
 

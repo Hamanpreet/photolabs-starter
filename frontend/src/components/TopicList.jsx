@@ -9,9 +9,9 @@ const TopicList = (props) => {
   const {topics} = props;
   return (
     <div className="top-nav-bar__topic-list">
-      {/* Insert React */}
+
       {topics.map((el) =>{
-        return <TopicListItem {...el } key={el.id}/>;
+        return <TopicListItem topic={el} key={el.id}/>;
       })}
     </div>
   );

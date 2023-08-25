@@ -9,7 +9,7 @@ function PhotoFavButton({isFavorited, onToggleFavorite, showFav}) {
   const toggleFavPhoto = () => {
     setFavPhoto(prev => !prev);
     onToggleFavorite();
-    console.log("clicked");
+    console.log("clicked", favPhoto);
   };
   return (
     <div className="photo-list__fav-icon" onClick={toggleFavPhoto}>

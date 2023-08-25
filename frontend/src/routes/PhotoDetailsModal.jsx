@@ -19,7 +19,6 @@ const PhotoDetailsModal = ({
   
 
   const similarPhotosArray = Object.values(selectedPhoto.similarPhotos);
-
   return (
     <div className="photo-details-modal">
       <button
@@ -36,6 +35,7 @@ const PhotoDetailsModal = ({
           isFavorited={favoritedPhotos.some(
             (photo) => photo.id === selectedPhoto.id
           )}
+          
           onToggleFavorite={() => toggleFavorite(selectedPhoto.id)}
           showFav={showFav}
         />
