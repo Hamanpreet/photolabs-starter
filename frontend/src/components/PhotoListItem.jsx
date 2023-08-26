@@ -19,6 +19,11 @@ const PhotoListItem = (props) => {
       ...photo,
       regularImageUrl: photo.urls.regular,
       similarPhotos: photo.similar_photos,
+      username:photo.user.username,
+      name: photo.user.name,
+      profile: photo.user.profile,
+      city:photo.location.city,
+      country:photo.location.country
     };
 
     setSelectedPhoto(selectedPhotoData);

@@ -25,27 +25,46 @@ const PhotoDetailsModal = ({
         onClick={closeModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <div className="fav-button">
-        <PhotoFavButton
-          isFavorited={favoritedPhotos.some(
-            (photo) => photo.id === selectedPhoto.id
-          )}
-          onToggleFavorite={() => toggleFavorite(selectedPhoto.id)}
-          showFav={showFav}
+
+      <div className="photo-details-modal__images">
+        <div className="fav-button-container">
+          <PhotoFavButton
+            isFavorited={favoritedPhotos.some(
+              (photo) => photo.id === selectedPhoto.id
+            )}
+            onToggleFavorite={() => toggleFavorite(selectedPhoto.id)}
+            showFav={showFav}
+            className="fav-button"
+          />
+        </div>
+
+        <img
+          src={selectedPhoto.regularImageUrl}
+          className="photo-details-modal__image"
+        />
+        <div className="modal__user-details">
+          <img
+            className="modal__user-profile"
+            src={selectedPhoto.profile}
+            alt={"profile img for " + selectedPhoto.username}
+          />
+          <div>
+            <p className="modal__user-info">{selectedPhoto.username}</p>
+            <p className="modal__user-info modal__user-location ">
+              {selectedPhoto.city + ", "}
+              {selectedPhoto.country}
+            </p>
+          </div>
+        </div>
+
+        <p className="photo-details-modal__header">Similar Photos</p>
+        <PhotoList
+          photos={similarPhotosArray}
+          favoritedPhotos={favoritedPhotos}
+          onToggleFavorite={toggleFavorite}
+          className="photo-list"
         />
       </div>
-      <img
-        src={selectedPhoto.regularImageUrl}
-        className="photo-details-modal__image"
-      />
-
-      <p className="photo-details-modal__header">Similar Photos</p>
-      <PhotoList
-        photos={similarPhotosArray}
-        favoritedPhotos={favoritedPhotos}
-        onToggleFavorite={toggleFavorite}
-        className="photo-details-modal__images"
-      />
     </div>
   );
 };

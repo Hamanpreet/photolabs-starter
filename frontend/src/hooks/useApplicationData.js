@@ -65,8 +65,8 @@ export function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const photoPromise = axios.get("http://localhost:8001/api/photos");
-    const topicPromise = axios.get("http://localhost:8001/api/topics");
+    const photoPromise = axios.get("/api/photos");
+    const topicPromise = axios.get("/api/topics");
 
     const promises = [photoPromise, topicPromise];
 
@@ -95,7 +95,7 @@ export function useApplicationData() {
   const photoTopicData = (selectedTopicId) => {
     if (selectedTopicId !== null) {
       axios
-        .get(`http://localhost:8001/api/topics/photos/${selectedTopicId}`)
+        .get(`/api/topics/photos/${selectedTopicId}`)
         .then((res) => {
           dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: res.data });
         })
