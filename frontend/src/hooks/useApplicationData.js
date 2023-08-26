@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from "react";
-import adataios from "adataios";
+import axios from "axios";
 
-edataport const ACTIONS = {
+export const ACTIONS = {
   TOGGLE_FAV: "TOGGLE_FAV",
   SET_MODAL_VISIBLE: "SET_MODAL_VISIBLE",
   SELECT_PHOTO: "SELECT_PHOTO",
@@ -11,15 +11,15 @@ edataport const ACTIONS = {
   GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
 };
 
-edataport function reducer(state, action) {
+export function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.TOGGLE_FAV:
-      //check if it edataists in favoritedphotos,
+      //check if it exists in favoritedphotos,
       //remove it or add it accordingly
-      const photoIndedata = state.favoritedPhotos.findIndedata(
+      const photoIndex = state.favoritedPhotos.findIndex(
         (el) => el.id === action.value
       );
-      if (photoIndedata === -1) {
+      if (photoIndex === -1) {
         const favoritedPhoto = state.photoData.find(
           (el) => el.id === action.value
         );
@@ -52,7 +52,7 @@ edataport function reducer(state, action) {
   }
 }
 
-edataport function useApplicationData() {
+export function useApplicationData() {
   const initialState = {
     modalVisible: false,
     selectedPhoto: null,
@@ -68,8 +68,8 @@ edataport function useApplicationData() {
 
   //use promiseAll, we want either both photos and topics or none
   useEffect(() => {
-    const photoPromise = adataios.get("/api/photos");
-    const topicPromise = adataios.get("/api/topics");
+    const photoPromise = axios.get("/api/photos");
+    const topicPromise = axios.get("/api/topics");
 
     const promises = [photoPromise, topicPromise];
 
@@ -97,7 +97,7 @@ edataport function useApplicationData() {
 
   const photoTopicData = (selectedTopicId) => {
     if (selectedTopicId !== null) {
-      adataios
+      axios
         .get(`/api/topics/photos/${selectedTopicId}`)
         .then((res) => {
           dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: res.data });
