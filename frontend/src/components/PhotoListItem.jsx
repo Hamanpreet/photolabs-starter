@@ -12,6 +12,7 @@ const PhotoListItem = (props) => {
     setModalVisible,
     setSelectedPhoto,
   } = props;
+
   const handleModal = () => {
     setModalVisible(true);
     const selectedPhotoData = {
@@ -19,7 +20,7 @@ const PhotoListItem = (props) => {
       regularImageUrl: photo.urls.regular,
       similarPhotos: photo.similar_photos,
     };
-   
+
     setSelectedPhoto(selectedPhotoData);
   };
 

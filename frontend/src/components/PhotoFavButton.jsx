@@ -1,23 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState } from "react";
 
-import FavIcon from './FavIcon';
-import '../styles/PhotoFavButton.scss';
+import FavIcon from "./FavIcon";
+import "../styles/PhotoFavButton.scss";
 
-function PhotoFavButton({isFavorited, onToggleFavorite, showFav}) {
-  
-  const [favPhoto, setFavPhoto] = useState(false);
+function PhotoFavButton({ isFavorited, onToggleFavorite, showFav }) {
+  console.log(isFavorited);
+  const [favPhoto, setFavPhoto] = useState(isFavorited);
   const toggleFavPhoto = () => {
-    setFavPhoto(prev => !prev);
+    setFavPhoto((prev) => !prev);
     onToggleFavorite();
   };
   return (
     <div className="photo-list__fav-icon" onClick={toggleFavPhoto}>
       <div className="photo-list__fav-icon-svg">
-      <FavIcon selected={favPhoto}/>
+        <FavIcon selected={favPhoto} />
       </div>
     </div>
   );
 }
 
 export default PhotoFavButton;
-

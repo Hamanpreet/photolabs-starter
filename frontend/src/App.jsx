@@ -1,24 +1,32 @@
-import { React} from "react";
+import { React } from "react";
 import "./App.scss";
 import "./styles/PhotoList.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import { useApplicationData } from "hooks/useApplicationData";
 
-// deconstruct to use various functions
-export function Application(props) {
+
+export function Application() {
   const {
     state,
     setModalVisible,
     setSelectedPhoto,
     toggleFavorite,
     toggleShowFav,
-    setTopicData,
     photoTopicData,
   } = useApplicationData();
 
-  const { modalVisible, selectedPhoto, favoritedPhotos, showFav, topicData, photoData, photoTopic, selectedTopicId} = state;
-  console.log(favoritedPhotos);
+  const {
+    modalVisible,
+    selectedPhoto,
+    favoritedPhotos,
+    showFav,
+    topicData,
+    photoData,
+    photoTopic,
+    selectedTopicId,
+  } = state;
+
   return (
     <div className="App">
       <HomeRoute
@@ -33,7 +41,6 @@ export function Application(props) {
         showFav={showFav}
         selectedTopicId={selectedTopicId}
         photoTopicData={photoTopicData}
-        
       />
 
       {modalVisible && (

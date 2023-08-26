@@ -9,10 +9,8 @@ const PhotoList = (props) => {
     favoritedPhotos,
     setModalVisible,
     setSelectedPhoto,
-    topicData,
-    setTopicData,
   } = props;
- 
+
   return (
     <ul className="photo-list">
       {photos.map((photo) => {
@@ -21,10 +19,7 @@ const PhotoList = (props) => {
             photo={photo}
             key={photo.id}
             onToggleFavorite={onToggleFavorite}
-            
-            isFavorited={favoritedPhotos.some(
-              (el) => el.id === photo.id
-            )}
+            isFavorited={favoritedPhotos.some((el) => el.id === photo.id)}
             setModalVisible={setModalVisible}
             setSelectedPhoto={setSelectedPhoto}
           />

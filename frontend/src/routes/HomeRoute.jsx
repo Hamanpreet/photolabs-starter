@@ -1,5 +1,4 @@
-import { React, useState } from "react";
-
+import { React } from "react";
 import "../styles/HomeRoute.scss";
 import TopNavigationBar from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
@@ -16,7 +15,7 @@ const HomeRoute = (props) => {
     toggleShowFav,
     photoTopic,
     selectedTopicId,
-    photoTopicData
+    photoTopicData,
   } = props;
 
   return (
@@ -29,7 +28,6 @@ const HomeRoute = (props) => {
         photoTopic={photoTopic}
         selectedTopicId={selectedTopicId}
         photoTopicData={photoTopicData}
-  
       />
       <PhotoList
         photos={showFav ? favoritedPhotos : photos}
@@ -44,9 +42,3 @@ const HomeRoute = (props) => {
 };
 
 export default HomeRoute;
-
-// HomeRoute
-//   TopNavigationBar
-//     TopicList
-//     FavBadge
-//   PhotosList

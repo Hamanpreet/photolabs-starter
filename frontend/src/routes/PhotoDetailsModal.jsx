@@ -16,7 +16,6 @@ const PhotoDetailsModal = ({
   const closeModal = () => {
     setModalVisible(false);
   };
-  
 
   const similarPhotosArray = Object.values(selectedPhoto.similarPhotos);
   return (
@@ -26,16 +25,11 @@ const PhotoDetailsModal = ({
         onClick={closeModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      {/* <PhotoListItem photo={selectedPhoto} key={selectedPhoto.id}  onToggleFavorite={toggleFavorite}
-        isFavorited={favoritedPhotos.includes(selectedPhoto.id)}
-        setModalVisible={setModalVisible}
-        setSelectedPhoto={setSelectedPhoto}/> */}
       <div className="fav-button">
         <PhotoFavButton
           isFavorited={favoritedPhotos.some(
             (photo) => photo.id === selectedPhoto.id
           )}
-          
           onToggleFavorite={() => toggleFavorite(selectedPhoto.id)}
           showFav={showFav}
         />
@@ -52,10 +46,6 @@ const PhotoDetailsModal = ({
         onToggleFavorite={toggleFavorite}
         className="photo-details-modal__images"
       />
-      {/* {similarPhotosArray.map((el) => {
-        console.log(el);
-        return <img src={el.urls.regular} key={el.id} className='photo-details-modal--images'/>
-      })} */}
     </div>
   );
 };
