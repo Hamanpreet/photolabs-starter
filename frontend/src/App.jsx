@@ -18,7 +18,7 @@ export function Application(props) {
   } = useApplicationData();
 
   const { modalVisible, selectedPhoto, favoritedPhotos, showFav, topicData, photoData, photoTopic, selectedTopicId} = state;
-
+  console.log(favoritedPhotos);
   return (
     <div className="App">
       <HomeRoute

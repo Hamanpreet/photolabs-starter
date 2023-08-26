@@ -18,15 +18,13 @@ export const ACTIONS = {
 export function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.TOGGLE_FAV:
-      const checkFav = state.favoritedPhotos.filter((el) => el.id === action.value);
-      if (checkFav.length > 0) {
-        const filtered = state.favoritedPhotos.filter(el => el.id !== action.value);
-       
-        return { ...state, favoritedPhotos: filtered };
+      const photoIndex = state.favoritedPhotos.findIndex(el => el.id === action.value);
+      if (photoIndex === -1) {
+        const favoritedPhoto = state.photoData.find(el => el.id === action.value);
+        return { ...state, favoritedPhotos: [...state.favoritedPhotos, favoritedPhoto] };
       } else {
-        const favoritedPhotos = state.photoData.filter((el) => el.id === action.value);
-        
-        return { ...state, favoritedPhotos };
+        const updatedFavoritedPhotos = state.favoritedPhotos.filter(el => el.id !== action.value);
+        return { ...state, favoritedPhotos: updatedFavoritedPhotos };
       }
     case ACTIONS.TOGGLE_SHOW_FAV:
       return { ...state, showFav: !state.showFav };
@@ -61,10 +59,7 @@ export function useApplicationData() {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
- 
-  // useEffect(() => {
-    
-  // }, [state.selectedTopicId]);
+
 
 
   useEffect(() => {
@@ -75,7 +70,6 @@ export function useApplicationData() {
 
     Promise.all(promises)
     .then((arrResponse) => {
-      console.log(arrResponse[1].data)
       dispatch({type: ACTIONS.SET_PHOTO_DATA, value: arrResponse[0].data});
       dispatch({type: ACTIONS.SET_TOPIC_DATA, value: arrResponse[1].data});
       
@@ -103,7 +97,6 @@ export function useApplicationData() {
     if (selectedTopicId !== null) {
       axios.get(`http://localhost:8001/api/topics/photos/${selectedTopicId}`)
         .then((res) => {
-          console.log("here",res.data);
           dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: res.data });
         })
         .catch((error) => {

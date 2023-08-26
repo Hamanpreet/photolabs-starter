@@ -5,11 +5,10 @@ import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton({isFavorited, onToggleFavorite, showFav}) {
   
-  const [favPhoto, setFavPhoto] = useState(isFavorited);
+  const [favPhoto, setFavPhoto] = useState(false);
   const toggleFavPhoto = () => {
     setFavPhoto(prev => !prev);
     onToggleFavorite();
-    console.log("clicked", favPhoto);
   };
   return (
     <div className="photo-list__fav-icon" onClick={toggleFavPhoto}>
