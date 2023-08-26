@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from "react";
-import axios from "axios";
+import adataios from "adataios";
 
-export const ACTIONS = {
+edataport const ACTIONS = {
   TOGGLE_FAV: "TOGGLE_FAV",
   SET_MODAL_VISIBLE: "SET_MODAL_VISIBLE",
   SELECT_PHOTO: "SELECT_PHOTO",
@@ -11,13 +11,15 @@ export const ACTIONS = {
   GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
 };
 
-export function reducer(state, action) {
+edataport function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.TOGGLE_FAV:
-      const photoIndex = state.favoritedPhotos.findIndex(
+      //check if it edataists in favoritedphotos,
+      //remove it or add it accordingly
+      const photoIndedata = state.favoritedPhotos.findIndedata(
         (el) => el.id === action.value
       );
-      if (photoIndex === -1) {
+      if (photoIndedata === -1) {
         const favoritedPhoto = state.photoData.find(
           (el) => el.id === action.value
         );
@@ -50,7 +52,7 @@ export function reducer(state, action) {
   }
 }
 
-export function useApplicationData() {
+edataport function useApplicationData() {
   const initialState = {
     modalVisible: false,
     selectedPhoto: null,
@@ -64,9 +66,10 @@ export function useApplicationData() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  //use promiseAll, we want either both photos and topics or none
   useEffect(() => {
-    const photoPromise = axios.get("/api/photos");
-    const topicPromise = axios.get("/api/topics");
+    const photoPromise = adataios.get("/api/photos");
+    const topicPromise = adataios.get("/api/topics");
 
     const promises = [photoPromise, topicPromise];
 
@@ -80,12 +83,12 @@ export function useApplicationData() {
     dispatch({ type: ACTIONS.TOGGLE_FAV, value: photoId });
   };
 
-  const toggleShowFav = (x) => {
-    dispatch({ type: ACTIONS.TOGGLE_SHOW_FAV, value: x });
+  const toggleShowFav = (data) => {
+    dispatch({ type: ACTIONS.TOGGLE_SHOW_FAV, value: data });
   };
 
-  const setModalVisible = (x) => {
-    dispatch({ type: ACTIONS.SET_MODAL_VISIBLE, value: x });
+  const setModalVisible = (data) => {
+    dispatch({ type: ACTIONS.SET_MODAL_VISIBLE, value: data });
   };
 
   const setSelectedPhoto = (data) => {
@@ -94,7 +97,7 @@ export function useApplicationData() {
 
   const photoTopicData = (selectedTopicId) => {
     if (selectedTopicId !== null) {
-      axios
+      adataios
         .get(`/api/topics/photos/${selectedTopicId}`)
         .then((res) => {
           dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: res.data });
