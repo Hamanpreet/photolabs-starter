@@ -3,7 +3,6 @@ import { React, useState } from "react";
 import "../styles/HomeRoute.scss";
 import TopNavigationBar from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
-import FavBadge from "components/FavBadge";
 
 const HomeRoute = (props) => {
   const {
@@ -15,8 +14,9 @@ const HomeRoute = (props) => {
     favoritedPhotos,
     toggleFavorite,
     toggleShowFav,
-    setTopicData,
-    topicData,
+    photoTopic,
+    selectedTopicId,
+    photoTopicData
   } = props;
 
   return (
@@ -26,8 +26,10 @@ const HomeRoute = (props) => {
         favoritedPhotos={favoritedPhotos}
         toggleShowFav={toggleShowFav}
         showFav={showFav}
-        setTopicData = {setTopicData}
-        topicData = {topicData}
+        photoTopic={photoTopic}
+        selectedTopicId={selectedTopicId}
+        photoTopicData={photoTopicData}
+  
       />
       <PhotoList
         photos={showFav ? favoritedPhotos : photos}
@@ -35,7 +37,7 @@ const HomeRoute = (props) => {
         favoritedPhotos={favoritedPhotos}
         setModalVisible={setModalVisible}
         setSelectedPhoto={setSelectedPhoto}
-        topicData = {topicData}
+        photoTopicData={photoTopicData}
       />
     </div>
   );

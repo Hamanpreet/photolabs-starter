@@ -1,11 +1,9 @@
-import { React, useReducer } from "react";
+import { React} from "react";
 import "./App.scss";
 import "./styles/PhotoList.scss";
-import photos from "../src/mocks/photos";
-import topics from "../src/mocks/topics";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
-import { reducer, useApplicationData } from "hooks/useApplicationData";
+import { useApplicationData } from "hooks/useApplicationData";
 
 // deconstruct to use various functions
 export function Application(props) {
@@ -16,29 +14,32 @@ export function Application(props) {
     toggleFavorite,
     toggleShowFav,
     setTopicData,
+    photoTopicData,
   } = useApplicationData();
 
-  const { modalVisible, selectedPhoto, favoritedPhotos, showFav, topicData } = state;
+  const { modalVisible, selectedPhoto, favoritedPhotos, showFav, topicData, photoData, photoTopic, selectedTopicId} = state;
 
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
-        topics={topics}
+        photos={photoData}
+        topics={topicData}
+        photoTopic={photoTopic}
         setModalVisible={setModalVisible}
         setSelectedPhoto={setSelectedPhoto}
         favoritedPhotos={favoritedPhotos}
         toggleFavorite={toggleFavorite}
         toggleShowFav={toggleShowFav}
         showFav={showFav}
-        setTopicData = {setTopicData}
-        topicData = {topicData}
+        selectedTopicId={selectedTopicId}
+        photoTopicData={photoTopicData}
+        
       />
 
       {modalVisible && (
         <PhotoDetailsModal
           setModalVisible={setModalVisible}
-          photos={photos}
+          photos={photoData}
           selectedPhoto={selectedPhoto}
           favoritedPhotos={favoritedPhotos}
           toggleFavorite={toggleFavorite}
